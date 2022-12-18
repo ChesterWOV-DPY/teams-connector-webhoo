@@ -29,6 +29,7 @@
         }
         const params = parseSearch(window.location.search);
         if (params !== {}) {
+            console.log("ready to request")
             const req = new XMLHttpRequest();
             req.open('POST', params.webhookUrl);
             req.addEventListener('load', () => {
