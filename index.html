@@ -9,12 +9,37 @@
 </head>
 <body>
     <h1>Teams Connector Webhook Utilities</h1>
-    <form action="./process.php" method="post">
-        <b>Webhook URL</b><br><input type="url" name="webhookUrl"><br>
+    <form action="/" method="get">
+        <b>Webhook URL</b><br><input autofocus type="url" name="webhookUrl" required><br>
         <b>Title</b><br><input type="text" name="title"><br>
         <b>Suummary</b><br><input type="text" name="summary"><br>
-        <b>Text Content</b><br><textarea name="text">Hello World!</textarea><br>
+        <b>Text Content</b><br><textarea name="text" required>Hello World!</textarea><br>
         <input type="submit" value="Submit">
     </form>
+    <script>
+        function parseSearch(search) {
+            let rawParams = search.substring(1);
+            let params = new Object();
+            let key, value;
+            let searchObj = new URLSearchParams(rawParams);
+            for ([key, value] of searchObj.entries()) {
+                params[key] = value
+            }
+            return params
+        }
+        const params = parseSearch(window.location.search)
+        const req = new XMLHttpRequest();
+        req.open('POST', params.webhookUrl);
+        req.addEventListener('load', () => {
+            window.location.replace("/");
+        });
+        req.send({
+            "@type": 'MessageCard',
+            "@context": 'https://schema.org/extensions',
+            text: params.text,
+            summary: params.summary,
+            title: params.title
+        });
+    </script>
 </body>
 </html>
