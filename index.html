@@ -28,7 +28,7 @@
             return params
         }
         const params = parseSearch(window.location.search);
-        if (JSON.stringify(params) === JSON.stringify({})) {
+        if (JSON.stringify(params) !== JSON.stringify({})) {
             console.log("ready to request")
             const req = new XMLHttpRequest();
             req.open('POST', params.webhookUrl);
