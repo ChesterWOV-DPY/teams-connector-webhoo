@@ -27,19 +27,21 @@
             }
             return params
         }
-        const params = parseSearch(window.location.search)
-        const req = new XMLHttpRequest();
-        req.open('POST', params.webhookUrl);
-        req.addEventListener('load', () => {
-            window.location.replace("/");
-        });
-        req.send({
-            "@type": 'MessageCard',
-            "@context": 'https://schema.org/extensions',
-            text: params.text,
-            summary: params.summary,
-            title: params.title
-        });
+        const params = parseSearch(window.location.search);
+        if (params !== {}) {
+            const req = new XMLHttpRequest();
+            req.open('POST', params.webhookUrl);
+            req.addEventListener('load', () => {
+                window.location.replace("/");
+            });
+            req.send({
+                "@type": 'MessageCard',
+                "@context": 'https://schema.org/extensions',
+                text: params.text,
+                summary: params.summary,
+                title: params.title
+            });
+        }
     </script>
 </body>
 </html>
