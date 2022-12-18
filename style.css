@@ -4,7 +4,7 @@
     font-family: Roboto, helvetica, system-ui, sans-serif;
 }
 
-input::before textarea::before {
+form > input::before textarea::before {
     content: attr(data-label) + '<br>';
     font-weight: bold;
 }

@@ -7,6 +7,7 @@
     <title>Processing...</title>
 </head>
 <body>
+    <h1>Processing...</h1>
     <script>
         const req = new XMLHttpRequest()
         req.open('POST', "<?= $_POST['webhookUrl']; ?>");
